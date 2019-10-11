@@ -2,19 +2,27 @@ const db = require('../data/db.js')
 
 module.exports = {
     findProject, 
-    findById,
-    findResource,
-    findTasks
+    findProjectById,
+    findResources,
+    findResourceById,
+    findTasks,
+    findTaskById,
+    insertProject,
+    insertResource,
+    insertTask
 }
 
 function findProject() {
     return db('projects');
 }
-function findById(id) {
-    return find().where({ id }).first();
+function findProjectById(id) {
+    return findProject().where({ id }).first();
 }
-function findResource() {
+function findResources() {
     return db('resources')
+}
+function findResourceById(id) {
+    return findResources().where({ id }).first();
 }
 function findTasks() {
     return db('tasks')
@@ -26,4 +34,20 @@ function findTasks() {
         'tasks.notes',
         'tasks.completed'
     ])
+}
+function findTaskById(id) {
+    return findTasks().where({ id }).first();
+}
+function insertProject(project) {
+    console.log(project)
+    return db('projects')
+        .insert(project)
+}
+function insertResource(resource) {
+    return db('resources')
+        .insert(resource)
+}
+function insertTask(task) {
+    return db('tasks')
+        .insert(task)
 }
